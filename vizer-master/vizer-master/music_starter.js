@@ -10,47 +10,48 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
 //variables
 let horiz = 540;
 let vertic = 960;
-// let arrayOne = [0,60,120,180,240,300,360,420,480,540,600,660,720,780,840,900,960];
-let arrayOne = [0,120,240,360,480,600,720,840,960];
+angleMode(RADIANS);
 
-//bass
-let bassMap = map(bass,0,100,0,100);
-
-fill(200,200,150);
-
-// for(let i=0;i<16;i++){
-//     for(let k=0;k<17;k++){
-//   ellipse(30+arrayOne[0+i],arrayOne[0+k],bassMap);}
-//   // console.log(bass);
-//   }
 
 //drum
+let drumArray = [0,10]
 
 
+//bass
+
+
+fill(255)
+//other
+// let angles=[];
+let o = map(other,0,100,0,PI)
+let x = horiz/2;
+// let y = 50*sin(o*0.5)+vertic/2;
+let y = map(sin(o),-1,1,0,700)
+ellipse(x,y,10);
+
+// let x=other;
+// let y=20*sin(x*1)+10;
+// point(x,y);
 
 //vocals
-  // stroke(200,100,200);
-  // strokeWeight(6);
-  fill(255);
+let upWords = map(vocal,0,100,vertic/2,(vertic/2)-60);
+let downWords = map(vocal,0,100,vertic/2,(vertic/2)+50);
+let upWordsSize = map(vocal,0,100,80,40);
+let trans = map(vocal,0,100,255,50)
   textAlign(CENTER);
-  textSize(80)
-
-  
-  
-  let upWords = map(vocal,0,100,vertic/2,(vertic/2)-60);
-  let upWordsSize = map(vocal,0,100,80,40);
-  let upTrans = map(vocal,0,100,255,50)
-  push();
-  fill(255, upTrans)
+  fill(100,200,100, trans)
   textSize(upWordsSize);  
-  text(words,horiz/2,upWords)
-  pop();
   
+push();//upwords
+  text(words,horiz/2,upWords)
+pop();
+push();//down words
+  text(words,horiz/2,downWords)
+pop();
+
+  textSize(80)
+  fill(200,100,100);
   text(words,horiz/2,vertic/2);
-
-
-
-
 }
 
 
