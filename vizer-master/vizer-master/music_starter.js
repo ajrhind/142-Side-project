@@ -14,19 +14,33 @@ angleMode(RADIANS);
 
 
 //drum
-let drumArray = [0,10]
+let drumMap = map(drum,0,100,0,-400)
+let upDrum = map(drum,0,100,0,-10)
+// let upDrumOpp = map(drum,0,100,-10,0)
+let drumArray = [54,108,162,216,270,324,378,432,496]
+for(i=0;i<5;i++){
+  // for(k=0;k<50;k++){
+// fill(255);
+stroke(255);
+strokeWeight(2);
+line(drumArray[i],vertic+upDrum,drumArray[i],vertic+(upDrum*i)*10);
+line(drumArray[4+i],vertic+upDrum,drumArray[4+i],vertic+(upDrum/i)*10);
+// line()
+
+  }
 
 
 //bass
 
 
-fill(255)
+
+noStroke();
 //other
-// let angles=[];
-let o = map(other,0,100,0,PI)
+fill(255)
+let o = map(other,0,100,0,HALF_PI )
 let x = horiz/2;
 // let y = 50*sin(o*0.5)+vertic/2;
-let y = map(sin(o),-1,1,0,700)
+let y = map(sin(o),-1,1,(vertic/2)-500,(vertic/2)+150)
 ellipse(x,y,10);
 
 // let x=other;
