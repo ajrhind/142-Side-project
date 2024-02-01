@@ -16,16 +16,14 @@ angleMode(RADIANS);
 //drum
 let drumMap = map(drum,0,100,0,-400)
 let upDrum = map(drum,0,100,0,-10)
-// let upDrumOpp = map(drum,0,100,-10,0)
+let upDrumOpp = map(drum,0,100,0,-10)
 let drumArray = [54,108,162,216,270,324,378,432,496]
 for(i=0;i<5;i++){
-  // for(k=0;k<50;k++){
-// fill(255);
+
 stroke(255);
 strokeWeight(2);
 line(drumArray[i],vertic+upDrum,drumArray[i],vertic+(upDrum*i)*10);
-line(drumArray[4+i],vertic+upDrum,drumArray[4+i],vertic+(upDrum/i)*10);
-// line()
+line(216+drumArray[i],vertic+upDrum,216+drumArray[i],vertic+(upDrumOpp*i)*10);
 
   }
 
