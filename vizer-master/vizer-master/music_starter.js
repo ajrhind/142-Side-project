@@ -15,21 +15,24 @@ angleMode(RADIANS);
 
 //drum
 let drumMap = map(drum,0,100,0,-400)
-let upDrum = map(drum,0,100,0,-10)
-let upDrumOpp = map(drum,0,100,0,-10)
+let upDrum = map(drum,0,100,0,-5);
+let upDrumOpp = map(drum,0,100,0,10)
 let drumArray = [54,108,162,216,270,324,378,432,496]
-for(i=0;i<5;i++){
-
+for(i=0;i<9;i++){
 stroke(255);
-strokeWeight(2);
-line(drumArray[i],vertic+upDrum,drumArray[i],vertic+(upDrum*i)*10);
-line(216+drumArray[i],vertic+upDrum,216+drumArray[i],vertic+(upDrumOpp*i)*10);
-
+strokeWeight(3);
+line(drumArray[i],vertic,drumArray[i],vertic+(upDrum*i)*10);
+// line(216+drumArray[i],vertic+upDrum,216+drumArray[i],vertic+(upDrum/i)*10);
   }
 
-
 //bass
+let bassMap = map(bass,0,100,0,400);
+let downBass = map(bass,0,100,0,5);
+let bassArray = [496,432,378,324,270,216,162,108,54]
 
+for(k=0;k<9;k++){
+  line(bassArray[k],vertic-vertic,bassArray[k],(vertic-vertic)+(downBass*k)*10)
+}
 
 
 noStroke();
@@ -46,10 +49,10 @@ ellipse(x,y,10);
 // point(x,y);
 
 //vocals
-let upWords = map(vocal,0,100,vertic/2,(vertic/2)-60);
-let downWords = map(vocal,0,100,vertic/2,(vertic/2)+50);
+let upWords = map(vocal,0,100,vertic/2,(vertic/2)-100);
+let downWords = map(vocal,0,100,vertic/2,(vertic/2)+100);
 let upWordsSize = map(vocal,0,100,80,40);
-let trans = map(vocal,0,100,255,50)
+let trans = map(vocal,0,100,200,50)
   textAlign(CENTER);
   fill(100,200,100, trans)
   textSize(upWordsSize);  
