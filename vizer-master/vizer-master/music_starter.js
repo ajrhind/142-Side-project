@@ -9,13 +9,21 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
   //-----------------------------------------------------------------
   //variables
   //-----------------------------------------------------------------
-let trans = map(vocal,0,100,200,50);//transparency
-let Opptrans = map(vocal,0,100,50,200);//opposite transparency
-let horiz = 540;
-let vertic = 960;
-const blue = color('71ACD6');
-const closeWhite = color('EBEBEB');
+  //size of the canvas
+  let horiz = 540;
+  let vertic = 960;
+  //maps - in order of use
+  let trans = map(vocal,0,100,200,50);//transparency
+  let Opptrans = map(vocal,0,100,50,200);//opposite transparency
+  
+  let upDrum = map(drum,0,100,0,-5);
+  let downBass = map(bass,0,100,0,-5);
+  let midUp = map(other,0,100,0,50);
+  
+  let upWords = map(vocal,0,100,vertic/2,(vertic/2)-140);
+  let upWordsSize = map(vocal,0,100,80,40);
 
+//arrays - lists of numbers 
 let bassArray = [550,496,432,378,324,270,216,162,108,54,0];
 let drumArray = [0,54,108,162,216,270,324,378,432,496,550];
 
@@ -31,8 +39,6 @@ for(b=0;b<25;b++){
 //-----------------------------------------------------------------
 //drum and bass
 //-----------------------------------------------------------------
-let upDrum = map(drum,0,100,0,-5);
-let downBass = map(bass,0,100,0,-5);
 for(i=0;i<11;i++){
   strokeWeight(12);
   stroke(63, 55, 201, Opptrans)
@@ -51,7 +57,6 @@ for(i=0;i<11;i++){
 //-----------------------------------------------------------------
 //other
 //-----------------------------------------------------------------
-let midUp = map(other,0,100,0,50);
 
 push();
 translate(0,-140)
@@ -74,9 +79,6 @@ pop();
 //vocals
 //-----------------------------------------------------------------
 noStroke();
-let upWords = map(vocal,0,100,vertic/2,(vertic/2)-140);
-let downWords = map(vocal,0,100,vertic/2,(vertic/2)+100);
-let upWordsSize = map(vocal,0,100,80,40);
   textAlign(CENTER);
   fill(251, 158, 96, trans);
   textSize(upWordsSize);  
