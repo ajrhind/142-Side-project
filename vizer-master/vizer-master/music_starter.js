@@ -2,73 +2,90 @@
 // vocal, drum, bass, and other are volumes ranging from 0 to 100
 function draw_one_frame(words, vocal, drum, bass, other, counter) {
   background(20)
-  textFont('Helvetica'); // please use CSS safe fonts
-
+  textFont('Helvetica');
   rectMode(CENTER)
   textSize(24);
   noStroke();
-//variables
+  //-----------------------------------------------------------------
+  //variables
+  //-----------------------------------------------------------------
+let trans = map(vocal,0,100,200,50);//transparency
+let Opptrans = map(vocal,0,100,50,200);//opposite transparency
 let horiz = 540;
 let vertic = 960;
-angleMode(RADIANS);
+const blue = color('71ACD6');
+const closeWhite = color('EBEBEB');
 
+let bassArray = [550,496,432,378,324,270,216,162,108,54,0];
+let drumArray = [0,54,108,162,216,270,324,378,432,496,550];
 
-//drum
-let drumMap = map(drum,0,100,0,-400)
+//-----------------------------------------------------------------
+//background
+//-----------------------------------------------------------------
+background(29, 26, 35)
+for(b=0;b<25;b++){
+  stroke(114, 229, 114,50);
+  strokeWeight(1);
+  line(-880+b*100,vertic,horiz/2,vertic/2-100)
+}
+//-----------------------------------------------------------------
+//drum and bass
+//-----------------------------------------------------------------
 let upDrum = map(drum,0,100,0,-5);
-let upDrumOpp = map(drum,0,100,0,10)
-let drumArray = [54,108,162,216,270,324,378,432,496]
-for(i=0;i<9;i++){
-stroke(255);
-strokeWeight(3);
-line(drumArray[i],vertic,drumArray[i],vertic+(upDrum*i)*10);
-// line(216+drumArray[i],vertic+upDrum,216+drumArray[i],vertic+(upDrum/i)*10);
-  }
-
-//bass
-let bassMap = map(bass,0,100,0,400);
-let downBass = map(bass,0,100,0,5);
-let bassArray = [496,432,378,324,270,216,162,108,54]
-
-for(k=0;k<9;k++){
-  line(bassArray[k],vertic-vertic,bassArray[k],(vertic-vertic)+(downBass*k)*10)
+let downBass = map(bass,0,100,0,-5);
+for(i=0;i<11;i++){
+  strokeWeight(12);
+  stroke(63, 55, 201, Opptrans)
+  line(drumArray[i]-13.5,vertic,drumArray[i]-13.5,vertic+(upDrum*i)*11);
+  strokeWeight(6);
+  stroke(67, 97, 238, Opptrans)
+  line(drumArray[i]-10,vertic,drumArray[i]-10,vertic+(upDrum*i)*11);
+  strokeWeight(12);
+  stroke(114, 9, 183, Opptrans)
+  line(bassArray[i]+13.5,vertic,bassArray[i]+13.5,vertic+(downBass*i)*11);
+  strokeWeight(6);
+  stroke(181, 23, 158, Opptrans)
+  line(bassArray[i]+10,vertic,bassArray[i]+10,vertic+(downBass*i)*11);
 }
 
-
-noStroke();
+//-----------------------------------------------------------------
 //other
-fill(255)
-let o = map(other,0,100,0,HALF_PI )
-let x = horiz/2;
-// let y = 50*sin(o*0.5)+vertic/2;
-let y = map(sin(o),-1,1,(vertic/2)-500,(vertic/2)+150)
-ellipse(x,y,10);
+//-----------------------------------------------------------------
+let midUp = map(other,0,100,0,50);
 
-// let x=other;
-// let y=20*sin(x*1)+10;
-// point(x,y);
-
+push();
+translate(0,-140)
+for(let p=0;p<5;p++){
+  strokeWeight(4);
+  stroke(252, 146, 237, Opptrans);
+  line(0+p*50,(vertic/2+midUp*p),horiz-p*50,(vertic/2+midUp*p));
+  strokeWeight(10);
+  stroke(247, 37, 133, Opptrans);
+  line(0+p*50,vertic/2+midUp*p,horiz-p*50,vertic/2+midUp*p);
+  strokeWeight(4);
+  stroke(252, 146, 237, Opptrans);
+  line(0+p*50,(vertic/2-midUp*p),horiz-p*50,(vertic/2-midUp*p));
+  strokeWeight(10);
+  stroke(247, 37, 133, Opptrans);
+  line(0+p*50,vertic/2-midUp*p,horiz-p*50,vertic/2-midUp*p);
+}
+pop();
+//-----------------------------------------------------------------
 //vocals
-let upWords = map(vocal,0,100,vertic/2,(vertic/2)-100);
+//-----------------------------------------------------------------
+noStroke();
+let upWords = map(vocal,0,100,vertic/2,(vertic/2)-140);
 let downWords = map(vocal,0,100,vertic/2,(vertic/2)+100);
 let upWordsSize = map(vocal,0,100,80,40);
-let trans = map(vocal,0,100,200,50)
   textAlign(CENTER);
-  fill(100,200,100, trans)
+  fill(251, 158, 96, trans);
   textSize(upWordsSize);  
-  
-push();//upwords
-  text(words,horiz/2,upWords)
-pop();
-push();//down words
-  text(words,horiz/2,downWords)
-pop();
 
-  textSize(80)
-  fill(200,100,100);
-  text(words,horiz/2,vertic/2);
+  text(words,horiz/2,upWords+120); //upwords
+  textSize(80);
+  fill(233, 229, 114);
+  text(words,horiz/2,vertic/2+120);//big words
 }
-
 
 
 
@@ -110,4 +127,4 @@ pop();
   //  // display "words"
   //  textAlign(CENTER);
   //  textSize(vocal);
-  //  text(words, width/2, height/3);
+  //  text(words, width/2, height/3)
